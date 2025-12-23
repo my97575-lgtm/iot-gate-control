@@ -1,0 +1,15 @@
+{
+  "name": "gate-mqtt-ws-server",
+  "version": "1.0.0",
+  "description": "Bridge between MQTT (HiveMQ) and WebSocket UI, stores events to db.json",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^7.0.0",
+    "mqtt": "^4.3.7",
+    "ws": "^8.13.0"
+  }
+}

@@ -1,0 +1,31 @@
+# 1. Sử dụng PHP Apache làm nền tảng
+FROM php:8.2-apache
+
+# 2. Cài đặt các công cụ cần thiết: Node.js và Supervisor
+RUN apt-get update && apt-get install -y \
+    gnupg curl supervisor libssl-dev \
+    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# 3. Cài đặt Driver MongoDB cho PHP
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+
+# 4. Cấu hình thư mục chứa giao diện PHP
+WORKDIR /var/www/html
+COPY public_html/ .
+
+# 5. Cấu hình thư mục chứa logic Node.js
+WORKDIR /app
+COPY gate-server/ .
+# Cài đặt thư viện Node.js bên trong Docker
+RUN npm install
+
+# 6. Copy cấu hình Supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# 7. Mở cổng 80 (cho Web) và 3000 (cho WebSocket)
+EXPOSE 80 3000
+
+# 8. Chạy Supervisor để khởi động cả 2 server
+CMD ["/usr/bin/supervisord"]
