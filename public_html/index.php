@@ -135,8 +135,8 @@
     <script>
       /* KHÔI PHỤC TOÀN BỘ LOGIC JAVASCRIPT GỐC */
       const wsUrl = window.location.hostname === 'localhost' 
-          ? 'ws://localhost:3000' 
-          : `wss://${window.location.hostname}`;
+          ? 'ws://localhost:3000/ws' 
+          : `wss://${window.location.hostname}/ws`;
       let ws = null, lastAction = null, currentMode = 'NORMAL';
 
       const openBtn = document.getElementById('openBtn');
