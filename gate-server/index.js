@@ -35,7 +35,10 @@ app.use((req, res, next) => {
 });
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ 
+    server,
+    path: "/ws" // Thêm dòng này để phân biệt với yêu cầu web thông thường
+});
 
 // Hàm lưu sự kiện vào MongoDB thay vì db.json
 async function appendEvent(event) {
