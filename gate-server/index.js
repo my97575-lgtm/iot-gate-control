@@ -41,10 +41,10 @@ app.use((req, res, next) => {
     next();
 });
 // Nếu bạn để file HTML trong thư mục 'public', hãy dùng dòng này:
-app.use(express.static(path.join(__dirname, 'public'))); 
-// Hoặc nếu file HTML nằm cùng thư mục index.js:
+app.use(express.static(path.join(__dirname, '../public_html')));
+
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '../public_html/index.html'));
 });
 
 // 4. API lấy thống kê
