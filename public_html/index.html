@@ -136,7 +136,7 @@
       // Tự động nhận diện giao thức (ws/wss) và địa chỉ (host/port) từ trình duyệt
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
       const wsUrl = `${protocol}//${window.location.host}/ws`;
-      let ws = null, lastAction = null, currentMode = 'NORMAL';
+      const socket = new WebSocket(wsUrl);
 
       const openBtn = document.getElementById('openBtn');
       const closeBtn = document.getElementById('closeBtn');
