@@ -134,7 +134,9 @@
 
     <script>
       /* KHÔI PHỤC TOÀN BỘ LOGIC JAVASCRIPT GỐC */
-      const wsUrl = (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.hostname;
+      const wsUrl = window.location.hostname === 'localhost' 
+          ? 'ws://localhost:3000' 
+          : `wss://${window.location.hostname}`;
       let ws = null, lastAction = null, currentMode = 'NORMAL';
 
       const openBtn = document.getElementById('openBtn');
@@ -237,7 +239,7 @@
 
       async function loadStats() {
         const s = document.getElementById('startDate').value, e = document.getElementById('endDate').value;
-        const res = await fetch(`http://${location.hostname}:3000/api/stats/range?start=${s}&end=${e}`);
+        const res = await fetch(`/api/stats/range?start=${s}&end=${e}`);
         const data = await res.json();
         myChart.data.labels = data.data.map(d => d.date);
         myChart.data.datasets[0].data = data.data.map(d => d.opens);
