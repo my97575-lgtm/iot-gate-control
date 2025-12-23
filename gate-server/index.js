@@ -5,7 +5,10 @@ const mqtt = require('mqtt');
 const path = require('path');
 const { MongoClient } = require('mongodb'); // Thêm thư viện vừa cài
 
-const PORT = process.env.NONE_PORT || 3000;
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server đang chạy thành công tại cổng: ${PORT}`);
+});
 const MQTT_BROKER = 'mqtt://broker.hivemq.com:1883';
 const BASE_TOPIC = 'gate1';
 
